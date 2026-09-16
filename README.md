@@ -1,102 +1,63 @@
-# uiautodev Preact Plugin Template
+# AI 翻译
 
-基于 Preact + TypeScript + Tailwind CSS 的 [uiauto.dev](https://github.com/nicepkg/uiautodev) 插件开发模板。内置 AI 开发引导，用 Claude Code 打开项目即可开始。
+基于 AI 视觉模型的 [uiauto.dev](https://github.com/nicepkg/uiautodev) 插件：截取设备当前画面，自动识别界面文字并翻译，结果以「原文 / 译文」左右分栏流式展示。
 
-## 快速开始
+## 功能
 
-### 1. 克隆模板
+- **截屏翻译** — 一键截取当前设备画面，交给视觉大模型做 OCR + 翻译，无需手动输入文本
+- **流式输出** — 边接收边解析，翻译结果逐条实时显示
+- **多语言** — 支持中文、English、日本語、한국어、Français、Deutsch、Español、Русский、العربية，按钮文案随目标语言自动切换
+- **智能过滤** — 自动跳过图标、纯数字、时间戳、URL、代码；已是目标语言的文字不再翻译
+- **一键复制** — 点击任意条目即可复制译文
+- **用时统计** — 翻译完成后显示条目数与总耗时
 
-```bash
-git clone https://github.com/uiautodev-plugins/preact-template ~/.config/uiautodev/plugins/my-plugin
-cd !$
-```
+## 使用
 
-### 2. 安装依赖
-
-```bash
-npm install
-```
-
-### 3. 用 AI 开发插件
-
-本项目内置了 `CLAUDE.md`，Claude Code 会自动读取其中的开发指引。
-
-```bash
-# 在项目目录下启动 Claude Code
-claude
-```
-
-进入后对 AI 说 **"初始化项目"**，AI 会引导你：
-
-1. 描述你想做的插件功能
-2. 推荐插件名称
-3. 自动配置 `plugin.json`
-4. 拉取最新的类型定义
-5. 确认方案后直接开始开发
-
-你也可以直接告诉 AI 你想做什么，比如：
-
-> "帮我做一个插件，点击按钮后截屏并保存到相册"
-
-AI 会读取 `plugin-runtime.d.ts` 中的平台 API 类型，自动完成开发。
+1. 在 uiauto.dev 中打开插件面板
+2. 选择目标语言
+3. 点击「翻译屏幕」按钮
+4. 稍等片刻，界面文字会逐条出现在下方列表中，点击条目复制译文
 
 ## 项目结构
 
 ```
 ├── plugin.json          # 插件元信息（名称、版本、描述）
-├── app.tsx              # 插件逻辑入口（开发这个文件）
+├── app.tsx              # 插件逻辑入口
 ├── index.html           # 插件 UI 入口
 ├── styles.css           # Tailwind 样式源文件
 ├── tailwind.config.js   # Tailwind 配置（含 darkMode: 'class'）
 ├── app.js               # 编译产物（由 app.tsx 打包）
 ├── app.css              # 编译产物（由 styles.css 生成）
-├── plugin-runtime.d.ts  # 平台 API 类型定义
-└── CLAUDE.md            # AI 开发指引（Claude Code 自动读取）
-```
-
-## 可用 API
-
-通过全局变量 `$u` 访问平台 API（详见 `plugin-runtime.d.ts`）：
-
-```typescript
-// 执行 shell 命令
-const result = await $u.shell('getprop ro.product.model');
-console.log(result.output); // 设备型号
-
-// 当前设备 ID
-console.log($u.deviceId);
-
-// 截屏（返回 data:image/png;base64,...）
-const base64 = await $u.screenshotAsBase64();
-
-// 当前插件信息
-console.log($u.plugin.name);
+└── plugin-runtime.d.ts  # 平台 API 类型定义
 ```
 
 ## 开发命令
 
 ```bash
-npm run dev          # 开发模式，同时监听 app.tsx 与 styles.css 自动编译
+npm install          # 安装依赖（首次运行前执行）
+npm run fetch-types  # 拉取最新的类型定义（需 uiauto.dev 运行中）
+npm run dev          # 开发模式，同时监听 app.tsx 与 styles.css
 npm run build        # 编译为 app.js 和 app.css
 npm run build:css    # 仅重新生成 app.css
 npm run format       # 使用 prettier 格式化代码
-npm run fetch-types  # 拉取最新类型定义（需 uiauto.dev 运行中）
 ```
 
-## 代码规范
+## 实现说明
 
-项目使用 [pre-commit](https://pre-commit.com/) 在提交前自动运行 prettier 格式化。首次克隆后执行一次：
+插件通过 `$u` 全局对象访问平台能力（详见 `plugin-runtime.d.ts`）：
 
-```bash
-pre-commit install
-```
-
-之后每次 `git commit` 都会自动格式化改动文件（构建产物 `app.js`、`app.css` 已在 `.prettierignore` 中排除）。
+- `$u.screenshotAsBase64()` — 获取当前设备画面
+- `$u.openai()` — 调用已配置的 OpenAI 兼容接口（开启 `stream`，并设置 `reasoning_effort: 'none'` 关闭思考）
+- 模型按 JSON Lines 逐行返回 `["原文","译文"]`，插件按行解析并实时渲染
 
 ## 技术栈
 
 - **Preact** — 轻量 UI 框架
 - **TypeScript** — 类型安全
-- **Tailwind CSS** — v3，由 `tailwindcss` CLI 编译 `styles.css` 生成 `app.css`。`darkMode: 'class'` 跟随 `html.dark`，默认颜色用语义化 CSS 变量（`background`/`foreground`/`primary`）自动切换明暗
+- **Tailwind CSS** — v3，语义化 CSS 变量自动适配明暗主题
 - **lucide-preact** — 图标库
 - **esbuild** — 快速编译打包
+
+## License
+
+[MIT](./LICENSE)
