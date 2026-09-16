@@ -606,39 +606,103 @@
 
   // node_modules/lucide-preact/dist/esm/createLucideIcon.mjs
   function createLucideIcon(iconDataOrName, iconNode, aliases = []) {
-    const iconData2 = typeof iconDataOrName === "string" ? toLucideIconData(iconDataOrName, iconNode, aliases) : iconDataOrName;
+    const iconData8 = typeof iconDataOrName === "string" ? toLucideIconData(iconDataOrName, iconNode, aliases) : iconDataOrName;
     const Component = ({ class: classes = "", className = "", children, ...props }) => k(
       Icon,
       {
         ...props,
-        icon: iconData2,
+        icon: iconData8,
         class: mergeClasses(classes, className)
       },
       children
     );
-    if (iconData2.name) {
-      Component.displayName = toPascalCase(iconData2.name);
+    if (iconData8.name) {
+      Component.displayName = toPascalCase(iconData8.name);
     }
     return Component;
   }
 
-  // node_modules/lucide-preact/dist/esm/icons/house.mjs
+  // node_modules/lucide-preact/dist/esm/icons/check.mjs
   var iconData = {
-    name: "house",
+    name: "check",
+    size: 24,
+    node: [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]
+  };
+  var Check = createLucideIcon(iconData);
+
+  // node_modules/lucide-preact/dist/esm/icons/circle-alert.mjs
+  var iconData2 = {
+    name: "circle-alert",
     size: 24,
     node: [
-      ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
-      [
-        "path",
-        {
-          d: "M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
-          key: "r6nss1"
-        }
-      ]
+      ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+      ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+      ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
     ],
-    aliases: ["home"]
+    aliases: ["alert-circle"]
   };
-  var House = createLucideIcon(iconData);
+  var CircleAlert = createLucideIcon(iconData2);
+
+  // node_modules/lucide-preact/dist/esm/icons/copy.mjs
+  var iconData3 = {
+    name: "copy",
+    size: 24,
+    node: [
+      ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+      ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+    ]
+  };
+  var Copy = createLucideIcon(iconData3);
+
+  // node_modules/lucide-preact/dist/esm/icons/languages.mjs
+  var iconData4 = {
+    name: "languages",
+    size: 24,
+    node: [
+      ["path", { d: "m5 8 6 6", key: "1wu5hv" }],
+      ["path", { d: "m4 14 6-6 2-3", key: "1k1g8d" }],
+      ["path", { d: "M2 5h12", key: "or177f" }],
+      ["path", { d: "M7 2h1", key: "1t2jsx" }],
+      ["path", { d: "m22 22-5-10-5 10", key: "don7ne" }],
+      ["path", { d: "M14 18h6", key: "1m8k6r" }]
+    ]
+  };
+  var Languages = createLucideIcon(iconData4);
+
+  // node_modules/lucide-preact/dist/esm/icons/loader-circle.mjs
+  var iconData5 = {
+    name: "loader-circle",
+    size: 24,
+    node: [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]],
+    aliases: ["loader-2"]
+  };
+  var LoaderCircle = createLucideIcon(iconData5);
+
+  // node_modules/lucide-preact/dist/esm/icons/trash.mjs
+  var iconData6 = {
+    name: "trash",
+    size: 24,
+    node: [
+      ["path", { d: "M10 11v6", key: "nco0om" }],
+      ["path", { d: "M14 11v6", key: "outv1u" }],
+      ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6", key: "miytrc" }],
+      ["path", { d: "M3 6h18", key: "d0wm0j" }],
+      ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2", key: "e791ji" }]
+    ],
+    aliases: ["trash-2"]
+  };
+  var Trash = createLucideIcon(iconData6);
+
+  // node_modules/lucide-preact/dist/esm/icons/x.mjs
+  var iconData7 = {
+    name: "x",
+    size: 24,
+    node: [
+      ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+      ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+    ]
+  };
+  var X2 = createLucideIcon(iconData7);
 
   // node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js
   var f3 = 0;
@@ -652,38 +716,279 @@
   }
 
   // app.tsx
-  async function shell(cmd) {
-    const result = await $u.shell(cmd);
-    return result.output.trim();
+  var TARGET_LANGUAGES = [
+    { code: "zh", label: "\u4E2D\u6587", action: "\u7FFB\u8BD1\u5C4F\u5E55" },
+    { code: "en", label: "English", action: "Translate" },
+    { code: "ja", label: "\u65E5\u672C\u8A9E", action: "\u7FFB\u8A33" },
+    { code: "ko", label: "\uD55C\uAD6D\uC5B4", action: "\uBC88\uC5ED" },
+    { code: "fr", label: "Fran\xE7ais", action: "Traduire" },
+    { code: "de", label: "Deutsch", action: "\xDCbersetzen" },
+    { code: "es", label: "Espa\xF1ol", action: "Traducir" },
+    { code: "ru", label: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439", action: "\u041F\u0435\u0440\u0435\u0432\u0435\u0441\u0442\u0438" },
+    { code: "ar", label: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629", action: "\u062A\u0631\u062C\u0645" }
+  ];
+  function buildPrompt(targetLabel) {
+    return [
+      "You are a professional UI translator.",
+      `Detect every readable text in the screenshot and translate it into ${targetLabel}.`,
+      "Rules:",
+      "- Auto-detect the source language of each text.",
+      `- If a text is already in ${targetLabel}, skip it and do not output it.`,
+      "- Ignore icons, pure numbers, dates, timestamps, URLs, code and untranslatable brand names.",
+      "- Keep translations natural, concise and suitable for a mobile UI.",
+      "- Merge duplicated strings.",
+      "Output the result as JSON Lines: one JSON object per line, no array, no markdown fence, no explanation.",
+      'Each line must be exactly: ["<original>","<translation>"]',
+      "If there is no readable text, output nothing."
+    ].join("\n");
   }
-  function Button({
-    children,
-    onClick,
-    disabled
-  }) {
-    return /* @__PURE__ */ u3(
-      "button",
-      {
-        class: "inline-flex items-center justify-center gap-1 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
-        onClick,
-        disabled,
-        children
+  function extractText(content) {
+    if (typeof content === "string") return content;
+    if (Array.isArray(content)) {
+      return content.map((part) => part.text ?? "").join("");
+    }
+    return "";
+  }
+  function formatError(e3) {
+    if (e3 instanceof Error) return e3.message;
+    if (typeof e3 === "string") return e3;
+    if (e3 && typeof e3 === "object") {
+      const obj = e3;
+      if (typeof obj.message === "string" && obj.message) return obj.message;
+      if (obj.error) {
+        if (typeof obj.error === "string") return obj.error;
+        if (typeof obj.error?.message === "string") return obj.error.message;
       }
-    );
+      try {
+        return JSON.stringify(e3);
+      } catch {
+      }
+    }
+    return String(e3);
+  }
+  function makeItem(original, translation) {
+    if (!original || !translation) return null;
+    if (original.toLowerCase() === translation.toLowerCase()) return null;
+    return { original, translation };
+  }
+  function toItem(value) {
+    if (Array.isArray(value)) {
+      return makeItem(String(value[0] ?? "").trim(), String(value[1] ?? "").trim());
+    }
+    if (value && typeof value === "object") {
+      const obj = value;
+      return makeItem(
+        String(obj.o ?? obj.original ?? "").trim(),
+        String(obj.t ?? obj.translation ?? "").trim()
+      );
+    }
+    return null;
+  }
+  function parseLine(line) {
+    const text = line.trim().replace(/^```(?:json)?/i, "").replace(/```$/, "").replace(/,$/, "").trim();
+    if (!text.startsWith("{") && !text.startsWith("[")) return null;
+    try {
+      return toItem(JSON.parse(text));
+    } catch {
+      return null;
+    }
+  }
+  function parseItems(raw) {
+    let text = raw.trim();
+    if (!text) throw new Error("\u6A21\u578B\u6CA1\u6709\u8FD4\u56DE\u4EFB\u4F55\u5185\u5BB9\uFF0C\u8BF7\u786E\u8BA4\u6A21\u578B\u652F\u6301\u56FE\u7247\u8F93\u5165");
+    const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fence) text = fence[1].trim();
+    const start = text.indexOf("[");
+    const end = text.lastIndexOf("]");
+    if (start !== -1 && end > start) {
+      try {
+        const data = JSON.parse(text.slice(start, end + 1));
+        if (Array.isArray(data)) {
+          const items2 = data.map(toItem).filter((item) => item !== null);
+          if (items2.length > 0) return items2;
+        }
+      } catch {
+      }
+    }
+    const items = text.split("\n").map(parseLine).filter((item) => item !== null);
+    if (items.length === 0 && !text.includes("{") && !text.includes("[")) {
+      throw new Error(`\u6A21\u578B\u8FD4\u56DE\u5185\u5BB9\u65E0\u6CD5\u89E3\u6790\uFF1A${text.slice(0, 200)}`);
+    }
+    return items;
   }
   function App() {
+    const [target, setTarget] = d2("zh");
     const [loading, setLoading] = d2(false);
-    const goHome = q2(async () => {
+    const [error, setError] = d2("");
+    const [items, setItems] = d2([]);
+    const [copied, setCopied] = d2(null);
+    const [elapsed, setElapsed] = d2(null);
+    const currentLang = TARGET_LANGUAGES.find((l3) => l3.code === target) ?? TARGET_LANGUAGES[0];
+    const targetLabel = currentLang.label;
+    const translate = q2(async () => {
+      const startedAt = performance.now();
       setLoading(true);
+      setError("");
+      setItems([]);
+      setElapsed(null);
       try {
-        await shell("input keyevent HOME");
+        const dataUrl = await $u.screenshotAsBase64();
+        const base64 = dataUrl.replace(/^data:image\/\w+;base64,/, "");
+        const params = {
+          stream: true,
+          reasoning_effort: "none",
+          messages: [
+            {
+              role: "system",
+              content: "You are a precise OCR and translation engine that only outputs JSON Lines."
+            },
+            {
+              role: "user",
+              content: [
+                { type: "text", text: buildPrompt(targetLabel) },
+                { type: "image_url", image_url: { url: `data:image/png;base64,${base64}` } }
+              ]
+            }
+          ]
+        };
+        const res = await $u.openai(params);
+        let raw = "";
+        let buffer = "";
+        const collected = [];
+        const pushLine = (line) => {
+          const item = parseLine(line);
+          if (!item) return;
+          collected.push(item);
+          setItems([...collected]);
+        };
+        if (res && typeof res[Symbol.asyncIterator] === "function") {
+          for await (const chunk of res) {
+            const delta = chunk.choices?.[0]?.delta?.content ?? "";
+            if (!delta) continue;
+            raw += delta;
+            buffer += delta;
+            let index = buffer.indexOf("\n");
+            while (index !== -1) {
+              pushLine(buffer.slice(0, index));
+              buffer = buffer.slice(index + 1);
+              index = buffer.indexOf("\n");
+            }
+          }
+          pushLine(buffer);
+        } else {
+          raw = extractText(res.choices?.[0]?.message?.content);
+        }
+        console.log("[ai-translate] content:", raw);
+        if (collected.length === 0) {
+          const parsed = parseItems(raw);
+          setItems(parsed);
+          if (parsed.length === 0) setError("\u672A\u8BC6\u522B\u5230\u53EF\u7FFB\u8BD1\u7684\u6587\u5B57");
+        }
+      } catch (e3) {
+        console.error("[ai-translate] error:", e3);
+        setError(formatError(e3));
       } finally {
+        setElapsed((performance.now() - startedAt) / 1e3);
         setLoading(false);
       }
+    }, [targetLabel]);
+    const copy = q2(async (text, index) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopied(index);
+        setTimeout(() => setCopied((cur) => cur === index ? null : cur), 1200);
+      } catch {
+      }
     }, []);
-    return /* @__PURE__ */ u3(Button, { onClick: goHome, disabled: loading, children: [
-      /* @__PURE__ */ u3(House, { size: 14 }),
-      loading ? "Going..." : "Home"
+    const clear = q2(() => {
+      setItems([]);
+      setError("");
+      setElapsed(null);
+    }, []);
+    return /* @__PURE__ */ u3("div", { class: "flex flex-col gap-2 p-3 text-sm", children: [
+      /* @__PURE__ */ u3("div", { class: "flex items-center gap-2", children: [
+        /* @__PURE__ */ u3("div", { class: "relative", children: [
+          /* @__PURE__ */ u3(
+            Languages,
+            {
+              size: 14,
+              class: "pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 opacity-60"
+            }
+          ),
+          /* @__PURE__ */ u3(
+            "select",
+            {
+              class: "cursor-pointer appearance-none rounded-md border border-foreground/15 bg-background py-1.5 pl-7 pr-6 text-xs outline-none focus:border-primary",
+              value: target,
+              onChange: (e3) => setTarget(e3.target.value),
+              children: TARGET_LANGUAGES.map((l3) => /* @__PURE__ */ u3("option", { value: l3.code, children: l3.label }, l3.code))
+            }
+          )
+        ] }),
+        /* @__PURE__ */ u3(
+          "button",
+          {
+            class: "inline-flex cursor-pointer items-center justify-center gap-1 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-50",
+            onClick: translate,
+            disabled: loading,
+            children: [
+              loading ? /* @__PURE__ */ u3(LoaderCircle, { size: 14, class: "animate-spin" }) : /* @__PURE__ */ u3(Languages, { size: 14 }),
+              currentLang.action
+            ]
+          }
+        ),
+        items.length > 0 && /* @__PURE__ */ u3(
+          "button",
+          {
+            class: "inline-flex cursor-pointer items-center justify-center rounded-md border border-foreground/15 p-1.5 opacity-70 hover:opacity-100",
+            title: "\u6E05\u7A7A",
+            onClick: clear,
+            children: /* @__PURE__ */ u3(Trash, { size: 14 })
+          }
+        )
+      ] }),
+      error && /* @__PURE__ */ u3("div", { class: "flex items-start gap-1.5 rounded-md bg-red-500/10 px-2 py-1.5 text-xs text-red-500", children: [
+        /* @__PURE__ */ u3(CircleAlert, { size: 14, class: "mt-px shrink-0" }),
+        /* @__PURE__ */ u3("span", { class: "min-w-0 flex-1 break-all", children: error }),
+        /* @__PURE__ */ u3(
+          "button",
+          {
+            class: "shrink-0 cursor-pointer opacity-60 hover:opacity-100",
+            title: "\u5173\u95ED",
+            onClick: () => setError(""),
+            children: /* @__PURE__ */ u3(X2, { size: 13 })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ u3("div", { class: "max-h-72 overflow-y-auto", children: [
+        items.length === 0 ? /* @__PURE__ */ u3("div", { class: "py-6 text-center text-xs opacity-40", children: "\u70B9\u51FB\u6309\u94AE\u8BC6\u522B\u5F53\u524D\u753B\u9762\u6587\u5B57" }) : /* @__PURE__ */ u3("ul", { class: "flex flex-col gap-1.5", children: items.map((item, index) => /* @__PURE__ */ u3(
+          "li",
+          {
+            class: "group flex cursor-pointer items-start gap-3 rounded-md border border-foreground/10 px-2.5 py-1.5 hover:border-primary/40",
+            title: "\u70B9\u51FB\u590D\u5236\u8BD1\u6587",
+            onClick: () => copy(item.translation, index),
+            children: [
+              /* @__PURE__ */ u3("p", { class: "min-w-0 flex-1 break-words text-xs leading-snug", children: item.original }),
+              /* @__PURE__ */ u3("p", { class: "min-w-0 flex-1 break-words leading-snug", children: item.translation }),
+              copied === index ? /* @__PURE__ */ u3(Check, { size: 13, class: "mt-0.5 shrink-0 text-green-500" }) : /* @__PURE__ */ u3(
+                Copy,
+                {
+                  size: 13,
+                  class: "mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-50"
+                }
+              )
+            ]
+          },
+          index
+        )) }),
+        loading && items.length > 0 && /* @__PURE__ */ u3("div", { class: "flex justify-center px-1 py-1.5 opacity-50", children: /* @__PURE__ */ u3(LoaderCircle, { size: 12, class: "animate-spin" }) }),
+        !loading && elapsed !== null && /* @__PURE__ */ u3("div", { class: "px-1 py-1.5 text-xs opacity-50", children: [
+          items.length > 0 ? `\u5171 ${items.length} \u6761 \xB7 ` : "",
+          "\u7528\u65F6 ",
+          elapsed.toFixed(2),
+          "s"
+        ] })
+      ] })
     ] });
   }
   R(/* @__PURE__ */ u3(App, {}), document.getElementById("app"));
@@ -701,7 +1006,13 @@ lucide-preact/dist/esm/shared/src/utils/hasA11yProp.mjs:
 lucide-preact/dist/esm/context.mjs:
 lucide-preact/dist/esm/Icon.mjs:
 lucide-preact/dist/esm/createLucideIcon.mjs:
-lucide-preact/dist/esm/icons/house.mjs:
+lucide-preact/dist/esm/icons/check.mjs:
+lucide-preact/dist/esm/icons/circle-alert.mjs:
+lucide-preact/dist/esm/icons/copy.mjs:
+lucide-preact/dist/esm/icons/languages.mjs:
+lucide-preact/dist/esm/icons/loader-circle.mjs:
+lucide-preact/dist/esm/icons/trash.mjs:
+lucide-preact/dist/esm/icons/x.mjs:
 lucide-preact/dist/esm/lucide-preact.mjs:
   (**
    * @license lucide-preact v1.45.0 - ISC

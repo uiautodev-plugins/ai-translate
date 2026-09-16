@@ -1,8 +1,8 @@
 {
   "$schema": "http://localhost:33299/plugin.schema.json",
-  "name": "preact-template",
+  "name": "AI 翻译",
   "version": "1.0.0",
-  "description": "A uiautodev plugin template with Preact and Tailwind CSS",
-  "homepage": "",
+  "description": "基于 AI 的界面文本翻译插件",
+  "homepage": "https://github.com/uiautodev-plugins/ai-translate",
   "main": "index.html"
 }
