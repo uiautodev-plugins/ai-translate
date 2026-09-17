@@ -1,6 +1,6 @@
 # AI 翻译
 
-基于 AI 视觉模型的 [uiauto.dev](https://github.com/nicepkg/uiautodev) 插件：截取设备当前画面，自动识别界面文字并翻译，结果以「原文 / 译文」左右分栏流式展示。
+基于 AI 视觉模型的 [uiauto.dev](https://github.com/uiautodev/uiautodev) 插件：截取设备当前画面，自动识别界面文字并翻译，结果以「原文 / 译文」左右分栏流式展示。
 
 ## 功能
 
