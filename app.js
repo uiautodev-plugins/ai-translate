@@ -905,7 +905,7 @@
       setError("");
       setElapsed(null);
     }, []);
-    return /* @__PURE__ */ u3("div", { class: "flex flex-col gap-2 p-3 text-sm", children: [
+    return /* @__PURE__ */ u3("div", { class: "flex flex-col gap-2 text-sm", children: [
       /* @__PURE__ */ u3("div", { class: "flex items-center gap-2", children: [
         /* @__PURE__ */ u3("div", { class: "relative", children: [
           /* @__PURE__ */ u3(

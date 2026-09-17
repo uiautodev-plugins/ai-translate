@@ -231,7 +231,7 @@ function App() {
   }, []);
 
   return (
-    <div class="flex flex-col gap-2 p-3 text-sm">
+    <div class="flex flex-col gap-2 text-sm">
       <div class="flex items-center gap-2">
         <div class="relative">
           <Languages
