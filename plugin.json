@@ -1,7 +1,7 @@
 {
   "$schema": "http://localhost:33299/plugin.schema.json",
   "name": "AI 翻译",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "基于 AI 的界面文本翻译插件",
   "homepage": "https://github.com/uiautodev-plugins/ai-translate",
   "main": "index.html"
